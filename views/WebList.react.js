@@ -30,7 +30,7 @@ module.exports = React.createClass({
   },
   componentDidMount: function(){
     var This = this;
-    this._getStoryList(1, function(data){
+    this._getStoryList(2, function(data){
         setTimeout(function(){       
           This.setState({
               dataSource: This.state.dataSource.cloneWithRows(data.Data),

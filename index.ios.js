@@ -1,15 +1,28 @@
 /**
  * IOS 入口文件
  */
-'use strict';
+import 'babel-polyfill';
+import React, { AppRegistry } from 'react-native';
+import { render } from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import reducer from './reducers';
+import { getListDatas } from './actions';
+import App from './containers/App';
+//import WebList from './views/WebList.react';
 
-var React = require('react-native');
-var WebList = require('./views/WebList.react');
-var { AppRegistry } = React;
+const middleware = process.env.NODE_ENV === 'production' ? [thunk] : [thunk, logger()];
+const store = createStore(reducer, applyMiddleware(...middleware));
 
 var ReactNativeRedux = React.createClass({
     render: function(){
-        return <WebList />;
+        return (
+        	<Provider store={store}>
+        		<App />
+        	</Provider>
+        );
     }
 });
 
