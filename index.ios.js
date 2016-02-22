@@ -1,21 +1,31 @@
 /**
  * IOS 入口文件
  */
-import 'babel-polyfill';
+//import 'babel-polyfill';
 import React, { AppRegistry } from 'react-native';
-import { render } from 'react-dom';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import reducer from './reducers';
-import { getListDatas } from './actions';
+import rootReducer from './reducers';
+import { selectSubstory, fetchPosts } from './actions/StoryActions'
 import App from './containers/App';
-//import WebList from './views/WebList.react';
 
-const middleware = process.env.NODE_ENV === 'production' ? [thunk] : [thunk, logger()];
-const store = createStore(reducer, applyMiddleware(...middleware));
+const loggerMiddleware = createLogger()
+const createStoreWithMiddleware = applyMiddleware(
+    thunkMiddleware, //允许我们dispatch()
+    loggerMiddleware //用来打印action日志的中间件
+)(createStore)
 
+const store = createStoreWithMiddleware(rootReducer)
+
+store.dispatch(selectSubreddit(1))
+store.dispatch(fetchPosts(1)).then(() =>
+  console.log(store.getState())
+)
+store.dispatch(fetchPostsIfNeeded(1)).then(() =>
+  console.log(store.getState())
+)
 var ReactNativeRedux = React.createClass({
     render: function(){
         return (
