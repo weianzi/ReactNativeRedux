@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { 
     SELECT_SUBSTORY, INVALIDATE_SUBSTORY, 
     REQUEST_POSTS, RECEIVE_POSTS 
-} from '../constants/ActionTypes';
+} from '../constants/actionType';
 
 function selectedSubstory(state=0, action){
     switch (action.type){
@@ -47,7 +47,7 @@ function postsBySubstory(state={}, action){
         case REQUEST_POSTS:
         case RECEIVE_POSTS:
             return Object.assign({}, state, {
-                ['sub' + action.substory]: posts(state[action.substory], action)
+                [action.substory]: posts(state[action.substory], action)
             })
             //另一种写法：
             //let nextState = {}

@@ -14,7 +14,11 @@ class App extends Component {
   constructor(props){
     super(props)
   }
-
+  /*getInitialState(){
+      return {
+          dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      }
+  }*/
   componentDidMount() {
     const { dispatch, selectedSubstory } = this.props
     dispatch(fetchPostsIfNeeded(selectedSubstory))
@@ -31,14 +35,14 @@ class App extends Component {
     const { posts, isFetching } = this.props
     return (
       <View>
-        {isFetching && posts.Data.length === 0 &&
+        {isFetching && posts.length === 0 &&
           <Text>Loading...</Text>
         }
-        {!isFetching && posts.Data.length === 0 &&
+        {!isFetching && posts.length === 0 &&
           <Text>没有内容</Text>
         }
-        {posts.Data.length > 0 &&
-          <List dataSource = {posts.Data}/>
+        {posts.length > 0 &&
+          <List dataSource = {posts}/>
         }
       </View>
     )
@@ -47,16 +51,28 @@ class App extends Component {
 
 App.propTypes = {
   selectedSubstory: PropTypes.number.isRequired,
-  posts: PropTypes.Object.isRequired,
+  posts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   const { selectedSubstory, postsBySubstory } = state
+  const {
+    isFetching,
+    lastUpDated,
+    items:posts
+  } = postsBySubstory[selectedSubstory] || {
+    isFetching: true,
+    items: []
+  }
   return {
-
+    selectedSubstory,
+    posts,
+    isFetching,
+    lastUpDated
   }
 }
 
 export default connect(mapStateToProps)(App)
+

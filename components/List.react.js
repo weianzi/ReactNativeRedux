@@ -5,13 +5,18 @@ import React, {
 import ListItem from './ListItem.react'
 
 export default class List extends Component {
+    /*getInitialState(){
+        return {
+            data: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        }
+    }*/
     render() {
         const { dataSource } = this.props
-        let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-        data.cloneWithRows(dataSource)
+        //let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        //data.cloneWithRows(dataSource)
         return (
             <ListView
-                dataSource={data}
+                dataSource={dataSource}
                 renderRow={this._renderRow}
                 onEndReachedThreshold={10}
                 automaticallyAdjustContentInsets={false}

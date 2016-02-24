@@ -31,7 +31,7 @@ export default class ListItem extends Component {
 }
 
 ListItem.propTypes = {
-    rowData: PropTypes.Object.isRequired
+    //rowData: PropTypes.Object.isRequired
 }
 
 const styles = StyleSheet.create({
