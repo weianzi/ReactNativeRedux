@@ -2,20 +2,26 @@
  * web 入口文件
  */
 'use strict';
+import React, { AppRegistry, Component } from 'react-native'
+import {Provider } from 'react-redux'
+import configureStore from './store/configureStore'
+import App from './containers/App.react'
 
-var React = require('react-native');
-var WebList = require('./views/WebList.react');
-var { AppRegistry } = React;
-
-var ReactNativeRedux = React.createClass({
-    render: function(){
-        return <WebList />;
+const store = configureStore()
+ 
+class ReactNativeRedux extends Component{
+    render() {
+        return (
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
     }
-});
+}
 
 AppRegistry.registerComponent('ReactNativeRedux', () => ReactNativeRedux);
 
 //web
-var app = document.createElement('div');
+let app = document.createElement('div');
 document.body.appendChild(app);
 AppRegistry.runApplication('ReactNativeRedux', {rootTag: app});
