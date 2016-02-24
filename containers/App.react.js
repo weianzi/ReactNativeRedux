@@ -42,7 +42,7 @@ class App extends Component {
           <Text>没有内容</Text>
         }
         {posts.length > 0 &&
-          <List dataSource = {posts}/>
+          <List posts = {posts}/>
         }
       </View>
     )

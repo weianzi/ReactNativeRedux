@@ -11,24 +11,19 @@ export default class List extends Component {
         }
     }*/
     render() {
-        const { dataSource } = this.props
-        //let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-        //data.cloneWithRows(dataSource)
         return (
-            <ListView
-                dataSource={dataSource}
-                renderRow={this._renderRow}
-                onEndReachedThreshold={10}
-                automaticallyAdjustContentInsets={false}
-                showsVerticalScrollIndicator={false} />
+            <View>
+                {this._renderRow()}
+            </View>
         )
     }
 
-    _renderRow(rowData){
-      return ( <ListItem rowData = {rowData} /> )
+    _renderRow(){
+        const { posts } = this.props
+        return posts.map((item, index) => (<ListItem rowData = {item} key={index}/>) )
     }
 }
 
 List.propTypes = {
-    dataSource: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired
 }
