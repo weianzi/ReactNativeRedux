@@ -1,9 +1,9 @@
 
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import { 
     SELECT_SUBSTORY, INVALIDATE_SUBSTORY, 
     REQUEST_POSTS, RECEIVE_POSTS 
-} from '../constants/actionType';
+} from '../constants/actionType'
 
 function selectedSubstory(state=0, action){
     switch (action.type){

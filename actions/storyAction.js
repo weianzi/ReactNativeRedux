@@ -1,7 +1,7 @@
 import { 
     SELECT_SUBSTORY, INVALIDATE_SUBSTORY, 
     REQUEST_POSTS, RECEIVE_POSTS 
-} from '../constants/actionType';
+} from '../constants/actionType'
 
 export function selectSubstory(substory) {
   return {

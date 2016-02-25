@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         marginBottom:10,
+        // position: 'fixed',
+        // zIndex: 999,
+        // width: '100%',
         backgroundColor:'#f7f7f7'
     },
     navItem:{
