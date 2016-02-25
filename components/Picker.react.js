@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         marginBottom:10,
-        background:'#f7f7f7'
+        backgroundColor:'#f7f7f7'
     },
     navItem:{
         flex:1,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     active:{
         color:'#F00',
-        background:'#e7e7e7'
+        backgroundColor:'#e7e7e7'
     },
 
 })
