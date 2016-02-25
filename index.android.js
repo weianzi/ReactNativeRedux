@@ -1,18 +1,18 @@
-/**
- * android 入口
- */
-'use strict';
+import { Provider } from 'react-redux'
+import React, { AppRegistry, Component } from 'react-native'
+import configureStore from './store/configureStore'
+import App from './containers/App.react'
 
-var React = require('react-native');
-var WebList = require('./views/WebList.react');
-var { AppRegistry } = React;
+const store = configureStore()
 
-
-var ReactNativeRedux = React.createClass({
-    render: function(){
-        return <WebList />;
+class ReactNativeRedux extends Component{
+    render() {
+        return (
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
     }
-})
+}
 
-AppRegistry.registerComponent('ReactNativeRedux', () => ReactNativeRedux);
-
+AppRegistry.registerComponent('ReactNativeRedux', () => ReactNativeRedux)
