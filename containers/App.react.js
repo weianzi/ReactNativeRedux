@@ -8,17 +8,12 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { selectSubstory, fetchPostsIfNeeded, invalidatesubreddit } from '../actions/storyAction'
-import List from '../components/List.react'
+import ListItem from '../components/ListItem.react'
 
 class App extends Component {
   constructor(props){
     super(props)
   }
-  /*getInitialState(){
-      return {
-          dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-      }
-  }*/
   componentDidMount() {
     const { dispatch, selectedSubstory } = this.props
     dispatch(fetchPostsIfNeeded(selectedSubstory))
@@ -29,22 +24,17 @@ class App extends Component {
       const { dispatch, selectedSubstory } = nextProps
       dispatch(fetchPostsIfNeeded(selectedSubstory))
     }
-  }
-
-  render() {
+  }  render() {
     const { posts, isFetching } = this.props
+    let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    let dataSource = data.cloneWithRows(posts)
     return (
-      <View>
-        {isFetching && posts.length === 0 &&
-          <Text>Loading...</Text>
-        }
-        {!isFetching && posts.length === 0 &&
-          <Text>没有内容</Text>
-        }
-        {posts.length > 0 &&
-          <List posts = {posts}/>
-        }
-      </View>
+        <ListView
+            dataSource={dataSource}
+            renderRow={ item => (<ListItem rowData={item} />) }
+            onEndReachedThreshold={10}
+            automaticallyAdjustContentInsets={false}
+            showsVerticalScrollIndicator={false} />
     )
   }
 }
@@ -61,7 +51,7 @@ function mapStateToProps(state) {
   const {
     isFetching,
     lastUpDated,
-    items:posts
+    items: posts
   } = postsBySubstory[selectedSubstory] || {
     isFetching: true,
     items: []

@@ -9,7 +9,7 @@ import App from './containers/App.react'
 
 const store = configureStore()
  
-class ReactNativeRedux extends Component{
+class ReactRedux extends Component{
     render() {
         return (
             <Provider store={store}>
@@ -19,9 +19,9 @@ class ReactNativeRedux extends Component{
     }
 }
 
-AppRegistry.registerComponent('ReactNativeRedux', () => ReactNativeRedux);
+AppRegistry.registerComponent('ReactRedux', () => ReactRedux);
 
 //web
 let app = document.createElement('div');
 document.body.appendChild(app);
-AppRegistry.runApplication('ReactNativeRedux', {rootTag: app});
+AppRegistry.runApplication('ReactRedux', {rootTag: app});
