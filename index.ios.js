@@ -1,7 +1,3 @@
-/**
- * IOS 入口文件
- */
-'use strict';
 import React, { AppRegistry, Component } from 'react-native'
 import {Provider } from 'react-redux'
 import configureStore from './store/configureStore'
