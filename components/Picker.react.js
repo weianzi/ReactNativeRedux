@@ -5,12 +5,16 @@ import React, {
 export default class Picker extends Component {
   render() {
     const { value, onPress, options } = this.props
-    const navText = ['全部', '生活', '百科', '养生', '文化', '器具']
     return (
         <View style={styles.navBoxView}>
-            {options.map(item =>
-                <TouchableHighlight style={styles.navItem} onPress={() => onPress(item)} key={item}>
-                    <Text style={[styles.text, value == item ? styles.active : null]}>{navText[item]}</Text>
+            {options.map((item, index) =>
+                <TouchableHighlight 
+                    style={styles.navItem} 
+                    onPress={() => onPress(index)} 
+                    key={index}>
+                    <Text style={[styles.text, value == index ? styles.active : null]}>
+                        {item}
+                    </Text>
                 </TouchableHighlight>)
             }
         </View>
@@ -20,7 +24,7 @@ export default class Picker extends Component {
 
 Picker.propTypes = {
   options: PropTypes.arrayOf(
-    PropTypes.number.isRequired
+    PropTypes.string.isRequired
   ).isRequired,
   value: PropTypes.number.isRequired,
   onPress: PropTypes.func.isRequired

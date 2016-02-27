@@ -39,8 +39,7 @@ class App extends Component {
               <Picker 
                 value={selectedSubstory} 
                 onPress={this.handleChange}
-                options ={[0, 1, 2, 3, 4, 5]}
-              />
+                options ={['全部', '生活', '百科', '养生', '文化', '器具']} />
             )}
             renderRow={ item => (<ListItem rowData={item} />) }
             onEndReachedThreshold={10}
