@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { selectSubstory, fetchPostsIfNeeded, invalidatesubreddit } from '../actions/storyAction'
 import ListItem from '../components/ListItem.react'
 import Picker from '../components/Picker.react'
+import LoadingView from '../components/LoadingView.react'
+import EmptyView from '../components/EmptyView.react'
 
 class App extends Component {
   constructor(props){
@@ -32,6 +34,12 @@ class App extends Component {
     const { selectedSubstory, posts, isFetching } = this.props
     let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     let dataSource = data.cloneWithRows(posts)
+    if(isFetching && posts.length === 0){
+        return <LoadingView />
+    }
+    if(!isFetching && posts.length === 0){
+        return <EmptyView />
+    }
     return (
         <ListView
             dataSource={dataSource}
