@@ -10,16 +10,13 @@ export default class LoadingView extends Component {
 		if(Platform.OS === 'android'){
 			return (
 				<View style={styles.container}>
-					<ProgressBarAndroid 
-						styleAttr="Large" 
-						style={styles.spinner} />
+					<ProgressBarAndroid  />
 				</View>
 			)
 		}
 		return (
 			<View style={styles.container}>
-				<ActivityIndicatorIOS 
-					style={styles.spinner} />
+				<ActivityIndicatorIOS  />
 			</View>
 		)
 	}
@@ -30,9 +27,5 @@ const styles = StyleSheet.create({
 		flex:1,
 		alignItems:'center',
 		justifyContent:'center',	
-	},
-	spinner: {
-	  width: 60,
-	  height: 60,
 	},
 })

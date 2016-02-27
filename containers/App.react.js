@@ -1,6 +1,6 @@
 import React, {
-  AppRegistry,  Component, PropTypes,  StyleSheet, Text, 
-  View,  Image,  ListView,  Platform,  TouchableHighlight,
+  AppRegistry, Component, PropTypes, StyleSheet, Platform,
+  View, ListView, TouchableHighlight,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { selectSubstory, fetchPostsIfNeeded, invalidatesubreddit } from '../actions/storyAction'
@@ -41,18 +41,22 @@ class App extends Component {
         return <EmptyView />
     }
     return (
-        <ListView
-            dataSource={dataSource}
-            renderHeader={ () => (
-              <Picker 
+        <View style={styles.container}>
+          <View style={styles.pickerView}>
+            <Picker 
                 value={selectedSubstory} 
                 onPress={this.handleChange}
                 options ={['全部', '生活', '百科', '养生', '文化', '器具']} />
-            )}
-            renderRow={ item => (<ListItem rowData={item} />) }
-            onEndReachedThreshold={10}
-            automaticallyAdjustContentInsets={false}
-            showsVerticalScrollIndicator={false} />
+          </View>
+          <ListView
+              style={styles.listView}
+              dataSource={dataSource}
+              //renderHeader={}
+              renderRow={ item => (<ListItem rowData={item} />) }
+              onEndReachedThreshold={10}
+              automaticallyAdjustContentInsets={false}
+              showsVerticalScrollIndicator={false} />
+        </View>
     )
   }
 }
@@ -63,6 +67,19 @@ App.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    marginTop: Platform.OS == 'ios' ? 20 : 0,
+  },
+  pickerView:{
+    height:39,
+  },
+  listView:{
+    flex:1,
+  },
+})
 
 function mapStateToProps(state) {
   const { selectedSubstory, postsBySubstory } = state
