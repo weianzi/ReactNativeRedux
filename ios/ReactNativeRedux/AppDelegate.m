@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 
 #import "RCTRootView.h"
+#import "CalendarManager.h"
+
 
 @implementation AppDelegate
 
@@ -51,7 +53,18 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  
+  [self performSelector:@selector(delayMethod) withObject:nil afterDelay:5.0f];
+  
   return YES;
+}
+
+- (void)delayMethod
+{
+  
+  NSLog(@"部分 时候用 它来避免在");
+  [[[CalendarManager alloc] init] calendarEventReminderReceived];
 }
 
 @end

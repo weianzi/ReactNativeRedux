@@ -1,11 +1,13 @@
 import React, {
   AppRegistry,  Component, PropTypes,  StyleSheet, Text, 
-  View,  Image,  ListView,  Platform,  TouchableHighlight,
+  View,  Image,  ListView,  Platform,  TouchableHighlight, NativeModules,NativeAppEventEmitter
 } from 'react-native'
 import { connect } from 'react-redux'
 import { selectSubstory, fetchPostsIfNeeded, invalidatesubreddit } from '../actions/storyAction'
 import ListItem from '../components/ListItem.react'
 import Picker from '../components/Picker.react'
+let subscription
+
 
 class App extends Component {
   constructor(props){
@@ -15,6 +17,11 @@ class App extends Component {
   componentDidMount() {
     const { dispatch, selectedSubstory } = this.props
     dispatch(fetchPostsIfNeeded(selectedSubstory))
+    console.log('11121121212')
+    NativeAppEventEmitter.addListener(
+      'EventReminder',
+      (reminder) => {console.log('非机动车');console.log(reminder)}
+    )
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,8 +30,19 @@ class App extends Component {
       dispatch(fetchPostsIfNeeded(selectedSubstory))
     }
   }
-
+  componentWillUnmount(){
+    subscription.remove()
+  }
   _handleChange(nextSubstory) {
+
+    let CalendarManager = NativeModules.CalendarManager
+    CalendarManager.addEvent('Birthday Party', {
+      location: '4 Privet Drive, Surrey',
+      ok: new Date().toString()
+    })
+
+
+
     this.props.dispatch(selectSubstory(nextSubstory))
   }
 
