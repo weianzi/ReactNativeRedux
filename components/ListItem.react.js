@@ -7,7 +7,7 @@ export default class ListItem extends Component {
     render() {
         const { rowData } = this.props
         return (
-            <TouchableHighlight underlayColor="#fff">
+            <TouchableHighlight underlayColor="#fff" onPress={this.toDetail}>
                 <View style={styles.itemView}>
                     <Image source={{uri:rowData.CoverUrl}} style={styles.coverImg}/>
                     <View style={styles.textView}>
@@ -27,6 +27,10 @@ export default class ListItem extends Component {
                 </View>
             </TouchableHighlight>
         )
+    }
+
+    toDetail(){
+      
     }
 }
 
