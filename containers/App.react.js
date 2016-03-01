@@ -1,11 +1,13 @@
 import React, {
-  AppRegistry,  Component, PropTypes,  StyleSheet, Text, 
-  View,  Image,  ListView,  Platform,  TouchableHighlight,
+  AppRegistry, Component, PropTypes, StyleSheet, Platform,
+  View, ListView, TouchableHighlight,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { selectSubstory, fetchPostsIfNeeded, invalidatesubreddit } from '../actions/storyAction'
 import ListItem from '../components/ListItem.react'
 import Picker from '../components/Picker.react'
+import LoadingView from '../components/LoadingView.react'
+import EmptyView from '../components/EmptyView.react'
 
 class App extends Component {
   constructor(props){
@@ -23,7 +25,9 @@ class App extends Component {
       dispatch(fetchPostsIfNeeded(selectedSubstory))
     }
   }
-
+  componentWillUnmount(){
+    subscription.remove()
+  }
   _handleChange(nextSubstory) {
     this.props.dispatch(selectSubstory(nextSubstory))
   }
@@ -32,19 +36,29 @@ class App extends Component {
     const { selectedSubstory, posts, isFetching } = this.props
     let data = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     let dataSource = data.cloneWithRows(posts)
+    if(isFetching && posts.length === 0){
+        return <LoadingView />
+    }
+    if(!isFetching && posts.length === 0){
+        return <EmptyView />
+    }
     return (
-        <ListView
-            dataSource={dataSource}
-            renderHeader={ () => (
-              <Picker 
+        <View style={styles.container}>
+          <View style={styles.pickerView}>
+            <Picker 
                 value={selectedSubstory} 
                 onPress={this.handleChange}
                 options ={['全部', '生活', '百科', '养生', '文化', '器具']} />
-            )}
-            renderRow={ item => (<ListItem rowData={item} />) }
-            onEndReachedThreshold={10}
-            automaticallyAdjustContentInsets={false}
-            showsVerticalScrollIndicator={false} />
+          </View>
+          <ListView
+              style={styles.listView}
+              dataSource={dataSource}
+              //renderHeader={}
+              renderRow={ item => (<ListItem rowData={item} />) }
+              onEndReachedThreshold={10}
+              automaticallyAdjustContentInsets={false}
+              showsVerticalScrollIndicator={false} />
+        </View>
     )
   }
 }
@@ -55,6 +69,19 @@ App.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    marginTop: Platform.OS == 'ios' ? 20 : 0,
+  },
+  pickerView:{
+    height:39,
+  },
+  listView:{
+    flex:1,
+  },
+})
 
 function mapStateToProps(state) {
   const { selectedSubstory, postsBySubstory } = state
