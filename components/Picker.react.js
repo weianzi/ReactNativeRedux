@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     navBoxView:{
         flex:1,
         flexDirection:'row',
-        marginBottom:10,
         backgroundColor:'#f7f7f7'
     },
     navItem:{
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     active:{
-        backgroundColor:'#f7f7f7'
+        backgroundColor:'#e7e7e7'
     },
     red:{
         color:'#F00',

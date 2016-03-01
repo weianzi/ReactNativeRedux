@@ -1,8 +1,7 @@
 import React, { 
     Component, PropTypes, StyleSheet, Text, View,
-    Platform, Image,
+    Platform, Image, ScrollView, WebView,
 } from 'react-native'
-import HTMLWebView from 'react-native-html-webview'
 
 const story = {
 	Title: '盖碗喝茶的“暗号”你都知道吗？',
@@ -12,44 +11,45 @@ const story = {
 
 export default class DetailView extends Component {
 	render() {
-		//const { story } = this.props
-		let html = `<!DOCTYPE html>
-					<html>
-						<head>
-							<style>img{width:100%}</style>
-						</head>
-	        			<body>
-	        				${story.Content}
-	        			</body>
-	        		</html>`
-		return (
-			<View style={styles.container}>
-				<View>
-					<Text>{story.title}</Text>
-					<Image
-						style={styles.cover}
-						source={{uri:story.Cover}} />
-				</View>
-				<HTMLWebView
-				    html={html}
-				    makeSafe={false}
-				    //closeLoading={}
-				    autoHeight={true} />
-			</View>
-		)
+	  if(Platform.OS == 'web'){
+	   	let HTML = '<style>img{width:100%}</style>' + story.Content;
+	    return(
+	      <ScrollView style={styles.container}>
+	          <Text style={styles.title}>{story.Title}</Text>
+	          <View style={styles.htmlView} dangerouslySetInnerHTML={{__html: HTML}} />
+	      </ScrollView>
+	    );
+	  }
+	  let HTML = '<!DOCTYPE html><html>'
+	      + '<head><style>img{width:100%}</style></head>'
+	      + '<body>'
+	      + story.Content
+	      + '</body></html>';
+	    return (
+	          <WebView
+	              style={styles.webView}
+	              source={{html: HTML}}
+	              automaticallyAdjustContentInsets={true}
+	              scalesPageToFit={true}
+	          />
+	    );
 	}
 }
 
 const styles = StyleSheet.create({
 	container:{
-		flex:1,
-		alignItems:'center',
-		justifyContent:'center',	
+	    flex: 1,
 	},
 	title:{
-
+	    height:40,
+	    marginTop:10,
+	    fontSize:20,
+	    textAlign:'center'
 	},
-	cover:{
-
+	htmlView:{
+	  padding:10,
+	},
+	webView:{
+	    flex:1,
 	},
 })

@@ -53,7 +53,6 @@ class App extends Component {
           <ListView
               style={styles.listView}
               dataSource={dataSource}
-              //renderHeader={}
               renderRow={ item => (<ListItem rowData={item} />) }
               onEndReachedThreshold={10}
               automaticallyAdjustContentInsets={false}
