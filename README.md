@@ -13,7 +13,7 @@ open -a "Google Chrome" --args --disable-web-security
 ```
 然后输入
 ```
-http://weianzi.github.io/ReactNativeWeb/web/output/index.html
+http://weianzi.github.io/ReactNativeRedux/web/output/index.html
 ```
 
 windows下, 请参考：

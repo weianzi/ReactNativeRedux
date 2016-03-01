@@ -9,10 +9,10 @@ export default class Picker extends Component {
         <View style={styles.navBoxView}>
             {options.map((item, index) =>
                 <TouchableHighlight 
-                    style={styles.navItem} 
+                    style={[styles.navItem, value == index ? styles.active : null]} 
                     onPress={() => onPress(index)} 
                     key={index}>
-                    <Text style={[styles.text, value == index ? styles.active : null]}>
+                    <Text style={[styles.text, value == index ? styles.red : null]}>
                         {item}
                     </Text>
                 </TouchableHighlight>)
@@ -39,16 +39,17 @@ const styles = StyleSheet.create({
     },
     navItem:{
         flex:1,
+        paddingTop:10,
     },
     text:{
-        paddingTop:10,
-        paddingBottom:10,
         fontSize:16,
-        textAlign:'center'
+        textAlign:'center',
     },
     active:{
+        backgroundColor:'#f7f7f7'
+    },
+    red:{
         color:'#F00',
-        backgroundColor:'#e7e7e7'
     },
 
 })
