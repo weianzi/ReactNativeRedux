@@ -72,7 +72,9 @@ App.propTypes = {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
+    marginTop:44,
+    //marginTop: Platform.OS == 'ios' ? 20 : 0,
+    marginBottom: 64,
   },
   pickerView:{
     height:39,
