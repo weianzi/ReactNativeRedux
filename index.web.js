@@ -4,14 +4,14 @@ import React, {
 }
 from 'react-native'
 import configureStore from './store/configureStore'
-import MainTabBar from './MainTabBar.react'
+import MainTabBar from './containers/MainTabBar.react'
 import StoryDetail from './containers/StoryDetail.react'
 import StoryList from'./containers/StoryList.react'
 
 const store = configureStore()
 
 let NavigationBarRouteMapper = {
-    LeftButton: function(route, navigator, index, navState) {
+    LeftButton(route, navigator, index, navState) {
         if (index === 0) {
             return null;
         }
@@ -23,12 +23,12 @@ let NavigationBarRouteMapper = {
             </TouchableOpacity>
         )
     },
-    RightButton: function(route, navigator, index, navState) {
+    RightButton(route, navigator, index, navState) {
         return (
             <View />
         )
     },
-    Title: function(route, navigator, index, navState) {
+    Title(route, navigator, index, navState) {
         if (!route.title) {
             return (
                 <Text style={[styles.navBarText, styles.navBarTitleText]}>

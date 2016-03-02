@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:44,
     //marginTop: Platform.OS == 'ios' ? 20 : 0,
-    marginBottom: 64,
+    marginBottom: 54,
   },
   pickerView:{
     height:39,
