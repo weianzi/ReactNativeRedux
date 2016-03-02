@@ -53,7 +53,6 @@ class App extends Component {
           <ListView
               style={styles.listView}
               dataSource={dataSource}
-              //renderHeader={}
               renderRow={ item => (<ListItem rowData={item} />) }
               onEndReachedThreshold={10}
               automaticallyAdjustContentInsets={false}
@@ -73,7 +72,9 @@ App.propTypes = {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
+    marginTop:44,
+    //marginTop: Platform.OS == 'ios' ? 20 : 0,
+    marginBottom: 54,
   },
   pickerView:{
     height:39,
