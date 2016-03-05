@@ -10,14 +10,14 @@ import React, {
   TouchableHighlight,
 } from 'react-native'
 
-import AreaPicker from '../components/AreaPicker.react'
+//import AreaPicker from '../components/AreaPicker.react'
 
 export default class Member extends Component{
 
   render(){
     return (
         <View style={styles.container}>
-            <AreaPicker />
+            {/*<AreaPicker />*/}
         </View>
     )
   }  
