@@ -6,7 +6,7 @@ from 'react-native'
 import configureStore from './store/configureStore'
 import MainTabBar from './containers/MainTabBar.react'
 import StoryDetail from './containers/StoryDetail.react'
-import StoryList from'./containers/StoryList.react'
+import StoryList from './containers/StoryList.react'
 
 const store = configureStore()
 

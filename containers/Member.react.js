@@ -10,12 +10,14 @@ import React, {
   TouchableHighlight,
 } from 'react-native'
 
+import AreaPicker from '../components/AreaPicker.react'
+
 export default class Member extends Component{
 
   render(){
     return (
         <View style={styles.container}>
-            <Text>会员页面</Text>
+            <AreaPicker />
         </View>
     )
   }  
@@ -27,8 +29,8 @@ const styles = StyleSheet.create({
       marginTop:44,
       marginBottom:54,
       backgroundColor:'#f8f8f8',
-      justifyContent:'center',
-      alignItems:'center',
+      //justifyContent:'center',
+      //alignItems:'center',
     },
 });
 
