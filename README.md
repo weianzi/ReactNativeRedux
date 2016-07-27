@@ -9,7 +9,7 @@
 
 因跨域，MAC系统终端输入以下代码，启动Chrome
 ```
-open -a "Google Chrome" --args --disable-web-security
+open -a "Google Chrome" --args --disable-web-security --user-data-dir
 ```
 然后输入
 ```
@@ -20,6 +20,9 @@ windows下, 请参考：
 ```
 Chrome浏览器如何设置可以解决Ajax跨域
 http://jingyan.baidu.com/article/7c6fb4281d685780642c900a.html
+
+创建Chrome的快捷方式，修改快捷方式的目标为：
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --args --disable-web-security --user-data-dir
 ```
 
 ## 入口
