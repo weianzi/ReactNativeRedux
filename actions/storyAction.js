@@ -36,7 +36,7 @@ function receivePosts(substory, json) {
 function fetchPosts(substory){
     return function(dispatch){
         dispatch(requestPosts(substory))
-        let domain = 'http://weixin.chatu.com'
+        let domain = 'http://app.chatu.com'
         let url = domain + '/api/article/getlist?pageindex=1&pagesize=10&categoryId=' + substory
         return fetch(url)
             .then(response => response.json())
